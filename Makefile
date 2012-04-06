@@ -7,7 +7,7 @@ ROOT_DIR = ./
 DEFAULT_CXX = clang++
 CXX = ${DEFAULT_CXX}
 CXX_FEATURES = -fno-rtti -fno-exceptions -fstrict-aliasing
-CXX_WARN_FLAGS += -Wall -Werror -Wno-unused-function 
+CXX_WARN_FLAGS += -Wall -Werror -Wno-unused-function
 CXX_WARN_FLAGS += -Wcast-qual
 OPTIMIZATION_LEVEL = -O0
 CXX_FLAGS = ${OPTIMIZATION_LEVEL} -g -ansi -I${ROOT_DIR}
@@ -17,19 +17,20 @@ GNU_COMPATIBLE_FLAGS = -pedantic -pedantic-errors -Wextra -Wcast-align -Wno-long
 
 # are we compiling with the g++?
 ifeq (${CXX}, g++)
-	#CXX_FEATURES += -flto
+#CXX_FEATURES += -flto
 	CXX_FLAGS += -std=gnu++98
 	CXX_FEATURES += -fno-stack-protector
 	CXX_WARN_FLAGS += -Wshadow -Wpointer-arith \
-				      -Wwrite-strings \
-				      -Wfloat-equal -Wconversion -Wredundant-decls \
-    				  -Wvolatile-register-var \
-    				  -Wstack-protector \
-    				  -Wstrict-aliasing=2 \
-    				  -Wold-style-cast
-	
+			-Wwrite-strings \
+			-Wfloat-equal -Wconversion -Wredundant-decls \
+			-Wvolatile-register-var \
+			-Wstack-protector \
+			-Wstrict-aliasing=2 \
+			-Wold-style-cast \
+			-Wno-attributes
+
 	ifneq (${OPTIMIZATION_LEVEL}, -O0)
-    	CXX_WARN_FLAGS += -Wuninitialized
+	CXX_WARN_FLAGS += -Wuninitialized
 	endif
 endif
 
@@ -67,7 +68,7 @@ bin/lib/%.o: grail/lib/%.cpp
 
 bin/lib/printer/%.o: grail/lib/io/%.cpp
 	${CXX} ${CXX_FLAGS} -c $< -o $@
-	
+
 bin/test/%.o: fltl/test/%.cpp
 	${CXX} ${CXX_FLAGS} -c $< -o $@
 

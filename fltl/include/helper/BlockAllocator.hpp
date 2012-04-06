@@ -31,6 +31,7 @@
 
 #include <cassert>
 #include <new>
+#include <cstddef>
 
 #include "fltl/include/helper/UnsafeCast.hpp"
 
